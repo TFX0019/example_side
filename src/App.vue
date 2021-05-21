@@ -1,28 +1,105 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div :class="!side1 ? 'panelOne' : 'panelOne panelOne_active'">
+      <a class="link" v-on:click="toggleTwo">
+        <Icon :width="20" :color="'#fff'" />
+        <span>Este es un link</span>
+      </a>
+    </div>
+    <div :class="!side2 ? 'panelTwo' : 'panelTwo panelTwo_active'"></div>
+    <button class="togleButton" v-on:click="toggleOne">Toggle sidebar</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Icon from './components/icon.vue';
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: {Icon},
+  data() {
+    return {
+      side1: false,
+      side2: false
+    }
+  },
+  methods: {
+    toggleOne: function() {
+      if(this.side2) {
+        this.side1 = !this.side1;
+        this.side2 = !this.side2;
+      } else {
+        this.side1 = !this.side1;
+      }
+    },
+    toggleTwo: function() {
+      this.side2 = !this.side2;
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    background: #fafafa;
+    position: relative;
+  }
+  .container {
+    width: 100%;
+    height: 100vh;
+    background: #fafafa;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .panelOne {
+    position: absolute;
+    width: 300px;
+    height: 100vh;
+    background: #212121;
+    top: 0;
+    left:-300px;
+    z-index: 10;
+    transition: all ease-in-out .3s;
+  }
+  .panelOne_active {
+    left: 0;
+  }
+
+  .panelTwo {
+    position: absolute;
+    width: 300px;
+    height: 100vh;
+    z-index: 9;
+    background: #bdbdbd;
+    top: 0;
+    left: -300px;
+    transition: all ease-in-out .1s;
+  }
+
+  .panelTwo_active {
+    left: 300px;
+  }
+
+  .togleButton {
+    width: 100px;
+    height: 40px;
+  }
+
+  .link {
+    margin-top: 50px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+  .link span {
+    margin-left: 20px;
+  }
 </style>
