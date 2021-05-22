@@ -7,7 +7,7 @@
       </a>
     </div>
     <div :class="!side2 ? 'panelTwo' : 'panelTwo panelTwo_active'">
-      <a v-for="(item, index) in list2" :key="index" class="link" v-on:click="toggleTwo(item.hijo.item)">
+      <a v-for="(item, index) in list2" :key="index" class="link">
         <Icon :name="item.icono" :width="20" :color="'#fff'" />
         <span>{{item.name}}</span>
       </a>
